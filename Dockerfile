@@ -3,7 +3,7 @@ ARG PHOENIX_VERSION=1.5.6
 
 FROM elixir:${ELIXIR_VERSION}-alpine AS elixir
 
-FROM papereira/devcontainer-base:alpine
+FROM papereira/devcontainer-base:0.2.0-alpine
 ARG VERSION=
 ARG USERNAME=vscode
 ARG USER_UID=1000
@@ -28,7 +28,6 @@ RUN apk update && \
   make \
   g++ \
   wget \
-  curl \
   inotify-tools \
   nodejs \
   nodejs-npm && \
@@ -43,7 +42,7 @@ USER ${USERNAME}
 
 # install starship prompt
 RUN curl -fsSL https://starship.rs/install.sh -o install.sh && \
-  zsh ./install.sh --yes && \
+  sh ./install.sh --yes && \
   rm install.sh
 
 # Add local node module binaries to PATH
