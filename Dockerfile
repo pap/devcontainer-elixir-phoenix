@@ -42,7 +42,7 @@ USER ${USERNAME}
 
 # install starship prompt
 RUN curl -fsSL https://starship.rs/install.sh -o install.sh && \
-  sh ./install.sh --yes && \
+  sh ./install.sh -V --yes && \
   rm install.sh
 
 # Add local node module binaries to PATH
