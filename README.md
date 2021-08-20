@@ -24,7 +24,7 @@ This is a list of the build arguments used and their default values:
 | Build Argument | default value |
 | -------------- | ------------- |
 | ELIXIR_VERSION | 1.12.2 |
-| PHOENIX_VERSION | 1.5.9 |
+| PHOENIX_VERSION | 1.5.10 |
 | USERNAME | vscode |
 | USER_UID | 1000 |
 | USER_GID | 1000 |
