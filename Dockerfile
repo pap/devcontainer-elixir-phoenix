@@ -1,9 +1,11 @@
-ARG ELIXIR_VERSION=1.13.3
-ARG PHOENIX_VERSION=1.6.6
+ARG ELIXIR_VERSION=1.17.0
+ARG PHOENIX_VERSION=1.7.12
+ARG OTP_VERSION=otp-27
+ARG ARCH=
 
-FROM elixir:${ELIXIR_VERSION}-alpine AS elixir
+FROM ${ARCH}elixir:${ELIXIR_VERSION}-${OTP_VERSION}-alpine AS elixir
 
-FROM papereira/devcontainer-base:0.2.0-alpine
+FROM papereira/devcontainer-base:0.2.1
 ARG VERSION=
 ARG USERNAME=vscode
 ARG USER_UID=1000
@@ -29,8 +31,9 @@ RUN apk update && \
   g++ \
   wget \
   inotify-tools \
+  starship \
   nodejs \
-  nodejs-npm && \
+  npm && \
   npm install npm -g --no-progress && \
   rm -rf /var/cache/apk/*
 
@@ -39,11 +42,6 @@ COPY --chown=${USER_UID}:${USER_GID} shell/.zshrc-specific shell/.welcome.sh /ho
 COPY shell/.zshrc-specific shell/.welcome.sh /root/
 
 USER ${USERNAME}
-
-# install starship prompt
-RUN curl -fsSL https://starship.rs/install.sh -o install.sh && \
-  sh ./install.sh -V --yes && \
-  rm install.sh
 
 # Add local node module binaries to PATH
 ENV PATH=./node_modules/.bin:$PATH
