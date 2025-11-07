@@ -1,0 +1,42 @@
+[
+  {
+    "label": "DevContainer: Build",
+    "command": "devcontainer build --workspace-folder .",
+    "tags": ["devcontainer"]
+  },
+  {
+    "label": "DevContainer: Up",
+    "command": "devcontainer up --workspace-folder .",
+    "tags": ["devcontainer"]
+  },
+  {
+    "label": "DevContainer: Exec Shell",
+    "command": "devcontainer exec --workspace-folder . fish",
+    "tags": ["devcontainer"]
+  },
+  {
+    "label": "Phoenix: Start Server",
+    "command": "devcontainer exec --workspace-folder . mix phx.server",
+    "tags": ["phoenix", "server"]
+  },
+  {
+    "label": "Mix: Get Dependencies",
+    "command": "devcontainer exec --workspace-folder . mix deps.get",
+    "tags": ["mix", "dependencies"]
+  },
+  {
+    "label": "Mix: Test",
+    "command": "devcontainer exec --workspace-folder . mix test",
+    "tags": ["mix", "test"]
+  },
+  {
+    "label": "Mix: Format",
+    "command": "devcontainer exec --workspace-folder . mix format",
+    "tags": ["mix", "format"]
+  },
+  {
+    "label": "IEx: Interactive Shell",
+    "command": "devcontainer exec --workspace-folder . iex -S mix",
+    "tags": ["iex", "repl"]
+  }
+]

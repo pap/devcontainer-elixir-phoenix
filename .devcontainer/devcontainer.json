@@ -1,0 +1,57 @@
+{
+  "name": "Elixir Phoenix Development",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "elixir-phoenix",
+  "workspaceFolder": "/workspace",
+
+  "forwardPorts": [4000, 4001],
+  "portsAttributes": {
+    "4000": {
+      "label": "Phoenix Server",
+      "onAutoForward": "notify"
+    },
+    "4001": {
+      "label": "Phoenix LiveReload",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "remoteUser": "dev",
+
+  "postCreateCommand": "mix deps.get",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "jakebecker.elixir-ls",
+        "bradlc.vscode-tailwindcss",
+        "phoenixframework.phoenix",
+        "editorconfig.editorconfig"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "fish",
+        "terminal.integrated.profiles.linux": {
+          "fish": {
+            "path": "/usr/bin/fish"
+          }
+        },
+        "elixirLS.fetchDeps": false,
+        "elixirLS.mixEnv": "dev",
+        "elixirLS.projectDir": "/workspace",
+        "files.watcherExclude": {
+          "**/_build/**": true,
+          "**/deps/**": true,
+          "**/node_modules/**": true
+        },
+        "files.associations": {
+          "*.heex": "phoenix-heex",
+          "*.html.eex": "html-eex"
+        }
+      }
+    }
+  },
+
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/dev/.ssh,readonly,type=bind,consistency=cached"
+  ]
+}
