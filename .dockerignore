@@ -1,10 +1,30 @@
-.devcontainer
+# Build artifacts
+_build/
+deps/
+node_modules/
+.elixir_ls/
+.expert/
+.mix/
+*.beam
+erl_crash.dump
+
+# Git
 .git
 .github
+
+# Editor
 .vscode
+.devcontainer
+.idea
+
+# Documentation
 .dockerignore
 .gitignore
 Dockerfile
 LICENSE
 README.md
 title.png
+
+# OS files
+.DS_Store
+Thumbs.db

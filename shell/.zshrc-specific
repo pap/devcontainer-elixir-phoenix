@@ -1,1 +1,0 @@
-plugins=(vscode git colorize docker docker-compose git-extras)

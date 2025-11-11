@@ -1,0 +1,48 @@
+services:
+  # Elixir Phoenix development container
+  elixir-phoenix:
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION:-latest}
+        USERNAME: ${USERNAME:-dev}
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+        ELIXIR_VERSION: ${ELIXIR_VERSION:-1.19.2}
+        ERLANG_VERSION: ${ERLANG_VERSION:-28.1.1}
+        PHOENIX_VERSION: ${PHOENIX_VERSION:-1.8.1}
+        DEBIAN_VERSION: ${DEBIAN_VERSION:-bullseye}
+        IMAGE_DATE: ${IMAGE_DATE:-20251103}
+    image: devcontainer-elixir-phoenix:${VERSION:-latest}
+    volumes:
+      # Mount your project workspace
+      - ./workspace:/workspace
+      # Persist Mix dependencies
+      - mix-deps:/home/${USERNAME:-dev}/.mix
+      - mix-build:/workspace/_build
+      # Persist Hex packages
+      - hex-packages:/home/${USERNAME:-dev}/.hex
+      # Persist Erlang/IEx history
+      - iex-history:/home/${USERNAME:-dev}/.erlang-history
+    environment:
+      - TZ=${TZ:-UTC}
+    ports:
+      # Phoenix default port
+      - "4000:4000"
+      # Phoenix LiveReload
+      - "4001:4001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    stdin_open: true
+    tty: true
+    command: fish
+
+volumes:
+  mix-deps:
+  mix-build:
+  hex-packages:
+  iex-history:
